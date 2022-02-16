@@ -43,7 +43,7 @@ public class SpellChecker
     System.out.println("-- LINEAR SEARCH: Number of words checked (loops/runtime): " + numChecks);
     return false;
   }
-  
+
   /** This uses BINARY search to find a word in the dictionary ArrayList and also
     * prints out the number of words checked.
     *
@@ -52,9 +52,35 @@ public class SpellChecker
   */
   public boolean binarySpellCheck(String word)
   {
-    /* IMPLEMENT ME! */
+    int numChecks = 0;
 
-    return false; // STUB
+    int left = 0;
+    int right = dictionary.size() - 1;
+
+    while (left <= right)
+    {
+      numChecks++;
+
+      int middle = (left + right) / 2;
+
+      if (dictionary.get(middle).compareTo(word) < 0)
+      {
+        left = middle + 1;
+      }
+      else if (dictionary.get(middle).compareTo(word) > 0)
+      {
+        right = middle - 1;
+      }
+      else
+      {
+        System.out.println("-- BINARY SEARCH: Number of words checked (loops/runtime): " + numChecks);
+        System.out.println(word +  " was found (so it's a word spelled correctly!");
+        return true;
+      }
+    }
+    System.out.println("BINARY SEARCH: Number of words checked (loops/runtime): " + numChecks);
+    System.out.println(word +  " was NOT found (did you spell it correctly?");
+    return false;
   }
 
   // private helper method, called in the constructor, which loads the words
